@@ -1,0 +1,14 @@
+services:
+  airflow-apiserver:
+    image: apache/airflow:3.1.8
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__DAG_PROCESSOR__MIN_FILE_PROCESS_INTERVAL: 5
+      AIRFLOW__CORE__MIN_SERIALIZED_DAG_UPDATE_INTERVAL: 5
+      AIRFLOW__CORE__MIN_SERIALIZED_DAG_FETCH_INTERVAL: 5
+    volumes:
+      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
+      - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
+      - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+      - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
+      - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
